@@ -1,0 +1,57 @@
+#include <chrono>
+#include <ctime>
+#include <iostream>
+#include <math.h>
+#include <time.h>
+#include <vector>
+using namespace std::chrono;
+using namespace std;
+long long uno = 1000;
+long long diez = 10000;
+long long mil = 50000;
+vector<long long> vez = {uno, diez, mil};
+unsigned t0, t1;
+// good:
+auto meastime(int a) {
+  // int a;
+  // cout << "ves : ";
+  // cin >> a;
+
+  vector<long long> ptorg = {0, 0, 0};
+  vector<vector<long long>> v;
+  v.reserve(vez[a]);
+  long long dist = 0;
+  srand(time(NULL));
+  for (long long i = 0; i < vez[a]; i++) {
+    v.push_back({rand(), rand(), rand()});
+  }
+
+  t0 = clock();
+  // Code to execute
+
+  // auto start = high_resolution_clock::now();
+
+  for (long long j = 1; j < vez[a]; j++) {
+    dist += sqrt(pow(ptorg[0] - v[j][0], 2) + pow(ptorg[1] - v[j][1], 2) +
+                 pow(ptorg[2] - v[j][2], 2));
+    // dist = 0;
+  }
+
+  // Get ending timepolong long
+  // auto stop = high_resolution_clock::now();
+  t1 = clock();
+
+  // auto duration = duration_cast<microseconds>(stop - start);
+
+  double time = (double(t1 - t0) / CLOCKS_PER_SEC);
+  cout << "Execution Time: " << time << endl;
+
+  //  cout << "Time taken by function: " << duration.count() << " microseconds"
+  //     << endl;
+}
+
+int main() {
+  meastime(0);
+  meastime(1);
+  meastime(2);
+}
